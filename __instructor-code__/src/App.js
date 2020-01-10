@@ -29,24 +29,16 @@ class App extends Component {
   }
 
   getVehicles() {
-    // axios (GET)
-    // setState with response -> vehiclesToDisplay
     axios.get('https://joes-autos.herokuapp.com/api/vehicles')
     .then(res => {
-      toast.success('Successfully got Vehicles')
-      // console.log(res.data)
+      toast.success('Successfully Got Vehicles')
       this.setState({vehiclesToDisplay: res.data})
-    });
+    })
   }
 
   getPotentialBuyers() {
     // axios (GET)
     // setState with response -> buyersToDisplay
-    axios.get('https://joes-autos.herokuapp.com/api/buyers')
-    .then(res => {
-      toast.success('Successfully added Buyer')
-      this.setState({buyersToDisplay: res.data})
-    });
   }
 
   sellCar(id) {
@@ -66,14 +58,6 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> vehiclesToDisplay
-    axios.get('https://joes-autos.herokuapp.com/api/vehicles', make)
-    .then (res => {
-      toast.success('Successfully Filtered')
-      this.setState({vehiclesToDisplay: res.data.vehicles})
-    })
-    .catch(err => {
-      toast.error('Request Failed')
-    })
   }
 
   filterByColor() {
@@ -86,7 +70,7 @@ class App extends Component {
   updatePrice(priceChange, id) {
     axios.put(`https://joes-autos.herokuapp.com/api/vehicles/${id}/${priceChange}`)
     .then(res => {
-      toast.success('Successfully updated price')
+      toast.success('successfully updated price')
       this.setState({vehiclesToDisplay: res.data.vehicles});
     })
     .catch(err => {
@@ -104,15 +88,13 @@ class App extends Component {
       price: this.price.value
     };
 
-    // axios (POST)
-    // setState with response -> vehiclesToDisplay
     axios.post('https://joes-autos.herokuapp.com/api/vehicles', newCar)
     .then(res => {
-      toast.success('Successfully addeds car')
+      toast.success('Successfully added car')
       this.setState({vehiclesToDisplay: res.data.vehicles})
     })
-    .catch((err) => {
-      toast.error('Failes to add')
+    .catch(err => {
+      toast.error('Failed to add vehicle')
       console.log(err)
     })
   }
